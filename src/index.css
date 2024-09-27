@@ -1,3 +1,7 @@
+*{
+  font-family: 'JETSansDigital';
+}
+
 .art-image {
   width: 398px;
   height: 299px;
@@ -33,7 +37,7 @@
 
 
 .title-and-artist {
-
+  
   display: flex;
   flex-wrap: wrap;
   line-height: 0.5;
@@ -59,6 +63,7 @@ line-height: 1.4;
 
 
 }
+
 
 .artist-name {
 display: inline-flex;
