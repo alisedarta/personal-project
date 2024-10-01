@@ -2,6 +2,10 @@
   font-family: 'JETSansDigital';
 }
 
+body {
+  background-color: #F5F3F1;
+}
+
 .art-image {
   width: 398px;
   height: 299px;
@@ -17,10 +21,11 @@
 .card-info {
   /*width: Fill 398px;
   height: 112px; */
-  padding: 24px 10px 24px 10px; 
+  padding: 24px 16px 24px 16px; 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  
   
   background: #262626;
 
@@ -40,10 +45,10 @@
   
   display: flex;
   flex-wrap: wrap;
-  line-height: 0.5;
+  /*line-height: 0.5;*/
   justify-content: space-between;
   align-items: baseline;
-  gap: 5px;
+  
 
 }
 
@@ -54,12 +59,11 @@ display: inline;
 text-align: left;
 font-size: 24px;
 font-weight: 800;
-margin-right: 10px;
+margin-right: 8px;
 margin-bottom: 0;
 margin-top: 0;
-margin-left: 0;
 color: white;
-line-height: 1.4; 
+line-height: 28px; 
 
 
 }
@@ -70,17 +74,19 @@ display: inline-flex;
 font-size: 24px;
 font-weight: 400;
 color: #ffffff;
-line-height: 1.2;
+line-height: 28px;
 flex-grow: 1;
 margin-top: 0;
+margin-bottom: 0;
 }
 
 .card-location {
 font-size: 16px;
 font-weight: 400;
+line-height: 24px;
   color: #ffffff;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 8px;
 }
 
 @media only screen
