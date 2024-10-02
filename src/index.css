@@ -6,6 +6,15 @@ body {
   background-color: #F5F3F1;
 }
 
+h1 {
+  margin-top: 72px;
+  margin-left: 16px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 40px;
+  text-align: left;
+}
+
 .art-image {
   width: 398px;
   height: 299px;
@@ -89,13 +98,18 @@ line-height: 24px;
   margin-top: 8px;
 }
 
-@media only screen
-     and (width: 430px) 
-     and (device-height: 932px)
-     and (-webkit-device-pixel-ratio: 3) {
+@media (min-width: 431px) and (max-width: 834px){
+  h1{
+    margin-left: 24px; 
+    font-size: 48px;
+    line-height: 56px;
+    }
+}
 
-      h1{
-        font-size: x-large;
-        color: red;
-      }
+@media (min-width: 835px){
+  h1{
+    margin-left: 32px;
+    font-size: 48px;
+    line-height: 56px;
+  }
 }
