@@ -21,33 +21,33 @@ for (let i = 0; i<10; i++){
       
         <h1>Overview</h1>
         <div className="grid-container">
-        <ul><GalleryCard 
+        <GalleryCard 
         title = {staticImage.title}
         image={staticImage.image}
         artist={staticImage.artist}
         location={staticImage.location}
-        altText={staticImage.altText}/></ul>
+        altText={staticImage.altText}/>
 
-   <ul> <GalleryCard 
+   <GalleryCard 
+        title = {staticImage.title}
+        image="https://www.shelbydillonstudio.com/cdn/shop/products/SeaSaltweb_2048x.jpg?v=1600313405"
+        artist={staticImage.artist}
+        location={staticImage.location}
+        altText={staticImage.altText}/>
+
+  <GalleryCard 
         title = {staticImage.title}
         image={staticImage.image}
         artist={staticImage.artist}
         location={staticImage.location}
-        altText={staticImage.altText}/></ul>
+        altText={staticImage.altText}/>
 
-<ul> <GalleryCard 
-        title = {staticImage.title}
-        image={staticImage.image}
-        artist={staticImage.artist}
-        location={staticImage.location}
-        altText={staticImage.altText}/></ul>
-
-<ul> <GalleryCard 
+  <GalleryCard 
         title = "This is much lomnger title on two lines possibly even longer"
         image={staticImage.image}
         artist={staticImage.artist}
         location={staticImage.location}
-        altText={staticImage.altText}/></ul>
+        altText={staticImage.altText}/>
 
 
         </div>
