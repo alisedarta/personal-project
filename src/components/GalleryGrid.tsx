@@ -1,21 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GalleryCard from "./GalleryCard";
 import { GalleryCardType } from "./GalleryCard";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const staticImage: GalleryCardType = {
   title: "The Bedroom",
-  artist: "Vincent van Gogh",
-  location: "Saint-Rémy-de-Provence, 1889",
+  artist_title: "Vincent van Gogh",
+  date_display: "Saint-Rémy-de-Provence, 1889",
+  place_of_origin: "something",
   image:
     "https://upload.wikimedia.org/wikipedia/commons/0/0b/Vincent_van_Gogh_-_The_Bedroom_-_Google_Art_Project.jpg",
-  altText: "Gustav Klimt painting",
+  image_id: "10",
 };
 
 function GalleryGrid() {
-  const [galleries, setGalleries] = useState<GalleryCardType[]>([]);
-  for (let i = 0; i < 10; i++) {
-    galleries.push(staticImage);
-  }
+  const [artworks, setArtworks] = useState<GalleryCardType[]>([]);
+  useEffect(() => {
+    const fetchArtworks = async () => {
+      try {
+        const response = await fetch(
+          "https://api.artic.edu/api/v1/artworks?page=1&fields=title,artist_title,place_of_origin,date_display,image_id"
+        );
+
+        if (!response.ok) {
+          throw new Error(`Error fetching API. Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setArtworks(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    (async () => await fetchArtworks())();
+  }, []);
+
+  const createImageURL = (imageId: string) => {
+    const url = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
+    return url;
+  };
+
+  const generateLocation = (place: string, date: string) => {
+    return `${place}, ${date}`;
+  };
 
   return (
     <>
@@ -23,38 +50,25 @@ function GalleryGrid() {
       <ul>
         <div className="grid-container">
           {" "}
-          <GalleryCard
-            title={staticImage.title}
-            image={staticImage.image}
-            artist={staticImage.artist}
-            location={staticImage.location}
-            altText={staticImage.altText}
-          />
-          <GalleryCard
-            title={staticImage.title}
-            image="https://www.shelbydillonstudio.com/cdn/shop/products/SeaSaltweb_2048x.jpg?v=1600313405"
-            artist={staticImage.artist}
-            location={staticImage.location}
-            altText={staticImage.altText}
-          />
-          <GalleryCard
-            title={staticImage.title}
-            image={staticImage.image}
-            artist={staticImage.artist}
-            location={staticImage.location}
-            altText={staticImage.altText}
-          />
-          <GalleryCard
-            title="This is much lomnger title on two lines possibly even longer"
-            image={staticImage.image}
-            artist={staticImage.artist}
-            location={staticImage.location}
-            altText={staticImage.altText}
-          />
+          {artworks.map((artwork) => (
+            <li>
+              {" "}
+              <GalleryCard
+                title={artwork.title}
+                artist={artwork.artist_title}
+                location={generateLocation(
+                  artwork.place_of_origin,
+                  artwork.date_display
+                )}
+                image={createImageURL(artwork.image_id)}
+                altText={artwork.title}
+              />
+            </li>
+          ))}
         </div>
       </ul>
 
-      {console.log(galleries)}
+      {console.log(artworks)}
     </>
   );
 }
