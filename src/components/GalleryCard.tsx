@@ -1,3 +1,6 @@
+import { useState } from "react";
+import unavailableImage from "../assets/unavailable-image.jpg";
+
 export type GalleryCardType = {
   title: string;
   artist_title: string;
@@ -20,16 +23,15 @@ function GalleryCard({
   image: string;
   altText: string;
 }) {
+  const [imageSource, setImageSource] = useState(image);
   return (
     <div className="card">
       <img
         alt={altText}
-        src={image}
+        src={imageSource}
         className="art-image"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src =
-            "https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg";
+        onError={() => {
+          setImageSource(unavailableImage);
         }}
       ></img>
       <div className="card-info">
