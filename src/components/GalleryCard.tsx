@@ -31,7 +31,9 @@ function GalleryCard({
         src={imageSource}
         className="art-image"
         onError={() => {
-          setImageSource(unavailableImage);
+          if (imageSource !== unavailableImage) {
+            setImageSource(unavailableImage);
+          }
         }}
       ></img>
       <div className="card-info">
