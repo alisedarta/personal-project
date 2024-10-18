@@ -17,6 +17,7 @@ function NavBar() {
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? "active-link" : "")}
+            onClick={toggleMenu}
           >
             Overview
           </NavLink>
@@ -25,6 +26,7 @@ function NavBar() {
           <NavLink
             to="/about"
             className={({ isActive }) => (isActive ? "active-link" : "")}
+            onClick={toggleMenu}
           >
             About
           </NavLink>
@@ -33,6 +35,7 @@ function NavBar() {
           <NavLink
             to="/terms-and-conditions"
             className={({ isActive }) => (isActive ? "active-link" : "")}
+            onClick={toggleMenu}
           >
             Terms & Conditions
           </NavLink>
