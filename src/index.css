@@ -110,7 +110,6 @@ nav {
   width: 100%;
   position: sticky;
   top: 0;
-  height: auto;
 }
 
 nav li {
@@ -118,13 +117,11 @@ nav li {
   font-weight: 700;
   line-height: 26px;
   text-align: center;
-  margin-right: 16px;
   margin-bottom: 8px;
-  margin-left: 16px;
-  padding: 8px 16px 8px 16px;
 }
 
-nav li:hover {
+nav a:hover,
+a:focus {
   background-color: #797876;
 }
 
@@ -133,38 +130,36 @@ nav ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: auto;
   padding-bottom: 66px;
   padding-top: 30px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-nav a {
+nav li a {
   text-decoration: none;
   color: white;
+  display: block;
+  padding: 8px 16px;
 }
 
 nav a.active-link {
   background-color: #ffffff;
   color: black;
 }
-nav ul li:has(a.active-link) {
-  background-color: white;
-  color: black;
-}
 
-.menu-button {
-  font-family: "Material Symbols Outlined";
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
+.menu-button-container {
   text-align: right;
   padding: 16px;
-  color: #ffffff;
 }
 
-.menu-button i {
+.material-symbols-outlined {
+  background: none;
+  color: #ffffff;
+  border: none;
   cursor: pointer;
 }
+
 .closed-menu {
   display: none;
 }
@@ -189,12 +184,10 @@ nav ul li:has(a.active-link) {
     align-items: center;
     height: 74px;
     margin-left: 24px;
-    padding-bottom: 0;
-    padding-top: 0;
+    padding: 0;
   }
 
   nav li {
-    display: inline;
     font-size: 19px;
     font-weight: 700;
     line-height: 26px;
@@ -208,7 +201,7 @@ nav ul li:has(a.active-link) {
     display: flex;
   }
 
-  .menu-button {
+  .menu-button-container {
     display: none;
   }
 }
@@ -237,27 +230,6 @@ nav ul li:has(a.active-link) {
   }
 
   nav ul {
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    height: 74px;
     margin-left: 32px;
-    padding-bottom: 0;
-    padding-top: 0;
-  }
-
-  nav li {
-    display: inline;
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 26px;
-    text-align: left;
-    margin-right: 8px;
-    margin-bottom: 0;
-    margin-left: 0;
-  }
-
-  .menu-button {
-    display: none;
   }
 }
