@@ -1,14 +1,19 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { to: "/", title: "Overview" },
     { to: "/about", title: "About" },
     { to: "/terms-and-conditions", title: "Terms & Conditions" },
   ];
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
@@ -24,7 +29,6 @@ function NavBar() {
             <NavLink
               to={link.to}
               className={({ isActive }) => (isActive ? "active-link" : "")}
-              onClick={toggleMenu}
             >
               {link.title}
             </NavLink>

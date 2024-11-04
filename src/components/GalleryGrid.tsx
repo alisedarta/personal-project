@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
-import GalleryCard from "./GalleryCard";
-import { GalleryCardType } from "./GalleryCard";
-import { fetchArtworks } from "../fetchApi";
+import GalleryCard, { GalleryCardType } from "./GalleryCard";
 
-function GalleryGrid() {
-  const [artworks, setArtworks] = useState<GalleryCardType[]>([]);
-  useEffect(() => {
-    const getArtworks = async () => {
-      const data = await fetchArtworks();
-      setArtworks(data.data);
-    };
+type GalleryGridProps = {
+  artworks: GalleryCardType[];
+};
 
-    getArtworks();
-  }, []);
-
+function GalleryGrid({ artworks }: GalleryGridProps) {
   const createImageURL = (imageId: string) => {
     const url = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
     return url;
@@ -25,7 +16,6 @@ function GalleryGrid() {
 
   return (
     <>
-      <h1>Overview</h1>
       <ul className="grid-container">
         {artworks.map((artwork) => (
           <li key={artwork.image_id}>
