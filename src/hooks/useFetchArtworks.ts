@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchArtworks } from "./fetchApi";
-import { GalleryCardType } from "./components/GalleryCard";
+import { GalleryCardType } from "../components/GalleryCard";
+import { fetchArtworks } from "../fetchApi";
 
 const useFetchArtworks = () => {
   const [artworks, setArtworks] = useState<GalleryCardType[]>([]);

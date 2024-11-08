@@ -9,6 +9,12 @@
 body {
   background-color: #f5f3f1;
   margin: 0;
+  margin-bottom: 24px;
+}
+
+.container {
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 li,
@@ -21,7 +27,6 @@ ul {
 
 h1 {
   margin-top: 72px;
-  margin-left: 16px;
   font-size: 32px;
   font-weight: 800;
   line-height: 40px;
@@ -53,8 +58,6 @@ h1 {
 }
 
 .grid-container {
-  margin-left: 16px;
-  margin-right: 16px;
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(1, minmax(var(--min-card-width), 1fr));
@@ -160,17 +163,15 @@ nav a.active-link {
 }
 
 .terms-and-about {
-  margin-left: 16px;
-  margin-right: 16px;
-
   p {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
   }
 
-  h4 {
+  .last-updated {
     font-style: italic;
+    font-weight: bold;
     font-size: 14px;
     margin-bottom: 32px;
   }
@@ -182,6 +183,7 @@ nav a.active-link {
 }
 
 .view-more-btn {
+  display: inline-block;
   background-color: #262626;
   color: white;
   width: fit-content;
@@ -191,19 +193,22 @@ nav a.active-link {
   border: none;
   padding: 8px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 @media (min-width: 834px) {
-  h1 {
+  .container {
     margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  h1 {
     font-size: 48px;
     line-height: 56px;
   }
 
   .grid-container {
     grid-template-columns: repeat(2, minmax(var(--min-card-width), 1fr));
-    margin-left: 24px;
-    margin-right: 24px;
   }
 
   nav ul {
@@ -212,7 +217,6 @@ nav a.active-link {
     justify-content: start;
     align-items: center;
     height: 74px;
-    margin-left: 24px;
     padding: 0;
   }
 
@@ -235,8 +239,6 @@ nav a.active-link {
   }
 
   .terms-and-about {
-    margin-left: 24px;
-    margin-right: 24px;
     p {
       font-size: 18px;
     }
@@ -244,8 +246,12 @@ nav a.active-link {
 }
 
 @media (min-width: 1512px) {
-  h1 {
+  .container {
     margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  h1 {
     font-size: 48px;
     line-height: 56px;
   }
@@ -262,15 +268,5 @@ nav a.active-link {
 
   .grid-container {
     grid-template-columns: repeat(4, minmax(var(--min-card-width), 1fr));
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-
-  nav ul {
-    margin-left: 32px;
-  }
-  .terms-and-about {
-    margin-left: 32px;
-    margin-right: 32px;
   }
 }

@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import useFetchArtworks from "../useFetchArtworks";
+import { NavLink } from "react-router-dom";
+
 import GalleryGrid from "./GalleryGrid";
+import useFetchArtworks from "../hooks/useFetchArtworks";
 
 function About() {
   const artworks = useFetchArtworks().slice(0, 4);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
-    <div>
+    <div className="container">
       <h1>About</h1>
       <div className="terms-and-about">
         <p>
@@ -16,9 +17,9 @@ function About() {
           using TypeScript, React and CSS. Feel free to browse through!
         </p>
         <GalleryGrid artworks={artworks} />
-        <button className="view-more-btn" onClick={() => navigate("/")}>
+        <NavLink className="view-more-btn" to="/">
           View More Artworks
-        </button>
+        </NavLink>
       </div>
     </div>
   );

@@ -18,23 +18,25 @@ function NavBar() {
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <nav>
-      <div className="menu-button-container">
-        <button className="material-symbols-outlined" onClick={toggleMenu}>
-          menu
-        </button>
+      <div className="container">
+        <div className="menu-button-container">
+          <button className="material-symbols-outlined" onClick={toggleMenu}>
+            menu
+          </button>
+        </div>
+        <ul className={isOpen ? "" : "closed-menu"}>
+          {navLinks.map((link) => (
+            <li key={link.title}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                {link.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className={isOpen ? "" : "closed-menu"}>
-        {navLinks.map((link) => (
-          <li key={link.title}>
-            <NavLink
-              to={link.to}
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              {link.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
     </nav>
   );
 }
