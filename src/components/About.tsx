@@ -5,7 +5,7 @@ import useFetchArtworks from "../hooks/useFetchArtworks";
 
 function About() {
   const artworks = useFetchArtworks().slice(0, 4);
-  //const navigate = useNavigate();
+
   return (
     <div className="container">
       <h1>About</h1>
