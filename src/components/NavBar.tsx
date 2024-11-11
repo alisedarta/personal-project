@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { to: "/", title: "Overview" },
@@ -10,27 +11,32 @@ function NavBar() {
     { to: "/terms-and-conditions", title: "Terms & Conditions" },
   ];
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <nav>
-      <div className="menu-button-container">
-        <button className="material-symbols-outlined" onClick={toggleMenu}>
-          menu
-        </button>
+      <div className="container">
+        <div className="menu-button-container">
+          <button className="material-symbols-outlined" onClick={toggleMenu}>
+            menu
+          </button>
+        </div>
+        <ul className={isOpen ? "" : "closed-menu"}>
+          {navLinks.map((link) => (
+            <li key={link.title}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                {link.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className={isOpen ? "" : "closed-menu"}>
-        {navLinks.map((link) => (
-          <li key={link.title}>
-            <NavLink
-              to={link.to}
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-              onClick={toggleMenu}
-            >
-              {link.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
     </nav>
   );
 }
