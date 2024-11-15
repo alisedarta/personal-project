@@ -58,7 +58,7 @@ h1 {
 }
 
 .grid-container {
-  margin-top: 40px;
+  margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(1, minmax(var(--min-card-width), 1fr));
   grid-column-gap: 24px;
@@ -194,6 +194,33 @@ nav a.active-link {
   padding: 8px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  button {
+    display: inline-block;
+    background-color: #262626;
+    color: white;
+    width: fit-content;
+    height: 42px;
+    padding: 8px 16px 8px 16px;
+    border-radius: 21px;
+    font-size: 19px;
+    line-height: 19px;
+    font-weight: 700;
+    border: 1px;
+    border-color: #262626;
+  }
+}
+
+.filters-container .disabled-filter {
+  background-color: white;
+  color: #262626;
+  border: 1px;
+  border-color: #dbd9d7;
 }
 
 @media (min-width: 834px) {
