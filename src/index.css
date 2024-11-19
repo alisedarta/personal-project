@@ -82,16 +82,14 @@ h1 {
     font-size: 19px;
     line-height: 19px;
     font-weight: 700;
-    border: 1px;
-    border-color: #262626;
+    border: 1px solid #262626;
   }
 }
 
 .filters-container .disabled-filter {
   background-color: white;
   color: #262626;
-  border: 1px;
-  border-color: #dbd9d7;
+  border: 1px solid #dbd9d7;
 }
 
 @media (min-width: 834px) {
