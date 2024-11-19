@@ -28,16 +28,10 @@ export const fetchArtworks = async (
       ],
     };
 
-    const response = await fetch(
-      "https://api.artic.edu/api/v1/artworks/search",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(query),
-      }
-    );
+    const params = encodeURIComponent(JSON.stringify(query));
+    const url = `https://api.artic.edu/api/v1/artworks/search?params=${params}`;
+
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Error fetching API. Status: ${response.status}`);
     }
