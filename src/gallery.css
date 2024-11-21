@@ -13,8 +13,6 @@
 }
 
 .card-info {
-  /*width: Fill 398px;
-    height: 112px; */
   padding: 24px 16px 24px 16px;
   display: flex;
   flex-direction: column;

@@ -7,7 +7,7 @@ function Overview() {
     () => localStorage.getItem("isOnView") === "true"
   );
   const [isPublicDomain, setIsPublicDomain] = useState(
-    localStorage.getItem("isPublicDomain") === "true"
+    () => localStorage.getItem("isPublicDomain") === "true"
   );
   const [isHiddenGem, setIsHiddenGem] = useState(
     () => localStorage.getItem("isHiddenGem") === "true"

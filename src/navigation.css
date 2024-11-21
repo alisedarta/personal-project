@@ -13,7 +13,7 @@ nav li {
   margin-bottom: 8px;
 }
 
-a:hover,
+nav a:hover,
 a:focus {
   background-color: #797876;
 }
