@@ -1,4 +1,5 @@
 import GalleryCard, { GalleryCardType } from "./GalleryCard";
+import "../gallery.css";
 
 type GalleryGridProps = {
   artworks: GalleryCardType[];

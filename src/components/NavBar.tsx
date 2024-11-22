@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-
+import "../navigation.css";
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();

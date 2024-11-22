@@ -1,6 +1,6 @@
 import { useState } from "react";
 import unavailableImage from "../assets/unavailable-image.jpg";
-
+import "../gallery.css";
 export type GalleryCardType = {
   title: string;
   artist_title: string;
