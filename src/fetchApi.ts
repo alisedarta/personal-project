@@ -1,7 +1,8 @@
 export const fetchArtworks = async (
   isOnView: boolean,
   isPublicDomain: boolean,
-  isHiddenGem: boolean
+  isHiddenGem: boolean,
+  searchTerm: string
 ) => {
   try {
     const query = {
@@ -13,6 +14,7 @@ export const fetchArtworks = async (
             ...(isHiddenGem
               ? [{ term: { has_not_been_viewed_much: true } }]
               : []),
+            ...(searchTerm ? [{ match: { title: searchTerm } }] : []),
           ],
         },
       },
