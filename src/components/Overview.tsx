@@ -1,66 +1,56 @@
 import { useEffect, useState } from "react";
 import useFetchArtworks from "../hooks/useFetchArtworks";
 import GalleryGrid from "./GalleryGrid";
-import Modal from "react-modal";
+import FiltersModal from "./FiltersModal";
 import "../modal.css";
 
 function Overview() {
-  const [localIsOnView, setLocalIsOnView] = useState(
-    () => localStorage.getItem("isOnView") === "true"
-  );
-  const [localIsPublicDomain, setLocalIsPublicDomain] = useState(
-    () => localStorage.getItem("isPublicDomain") === "true"
-  );
-  const [localIsHiddenGem, setLocalIsHiddenGem] = useState(
-    () => localStorage.getItem("isHiddenGem") === "true"
-  );
-  const [localSearchQuery, setLocalSearchQuery] = useState(
-    localStorage.getItem("searchQuery") || ""
-  );
+  const [localFilters, setLocalFilters] = useState(() => ({
+    isOnView: localStorage.getItem("isOnView") === "true",
+    isPublicDomain: localStorage.getItem("isPublicDomain") === "true",
+    isHiddenGem: localStorage.getItem("isHiddenGem") === "true",
+    searchQuery: localStorage.getItem("searchQuery") || "",
+  }));
 
-  // Final state for filters and search to be used in API call
-  const [isOnView, setIsOnView] = useState(localIsOnView);
-  const [isPublicDomain, setIsPublicDomain] = useState(localIsPublicDomain);
-  const [isHiddenGem, setIsHiddenGem] = useState(localIsHiddenGem);
-  const [searchQuery, setSearchQuery] = useState(localSearchQuery);
+  const [filters, setFilters] = useState(localFilters);
 
   const isFiltersActive =
-    isOnView || isPublicDomain || isHiddenGem || localSearchQuery !== "";
+    filters.isOnView ||
+    filters.isPublicDomain ||
+    filters.isHiddenGem ||
+    filters.searchQuery !== "";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsOnView(localIsOnView);
-    setIsPublicDomain(localIsPublicDomain);
-    setIsHiddenGem(localIsHiddenGem);
-    setSearchQuery(localSearchQuery);
+    setFilters(localFilters);
     setIsDialogOpen(false);
   };
 
   const artworks = useFetchArtworks(
-    isOnView,
-    isPublicDomain,
-    isHiddenGem,
-    searchQuery
+    filters.isOnView,
+    filters.isPublicDomain,
+    filters.isHiddenGem,
+    filters.searchQuery
   );
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const toggleDialog = () => {
     if (!isDialogOpen) {
-      setLocalIsOnView(isOnView);
-      setLocalIsPublicDomain(isPublicDomain);
-      setLocalIsHiddenGem(isHiddenGem);
-      setLocalSearchQuery(searchQuery);
+      setLocalFilters(filters);
     }
     setIsDialogOpen(!isDialogOpen);
   };
 
   useEffect(() => {
-    localStorage.setItem("isOnView", JSON.stringify(isOnView));
-    localStorage.setItem("isPublicDomain", JSON.stringify(isPublicDomain));
-    localStorage.setItem("isHiddenGem", JSON.stringify(isHiddenGem));
-    localStorage.setItem("searchQuery", searchQuery);
-  }, [isOnView, isPublicDomain, isHiddenGem, searchQuery]);
+    localStorage.setItem("isOnView", JSON.stringify(filters.isOnView));
+    localStorage.setItem(
+      "isPublicDomain",
+      JSON.stringify(filters.isPublicDomain)
+    );
+    localStorage.setItem("isHiddenGem", JSON.stringify(filters.isHiddenGem));
+    localStorage.setItem("searchQuery", filters.searchQuery);
+  }, [filters]);
 
   return (
     <div className="container">
@@ -71,51 +61,13 @@ function Overview() {
           {isFiltersActive && <span className="active-indicator"></span>}
         </button>
       </h1>
-      <Modal
+      <FiltersModal
         isOpen={isDialogOpen}
-        onRequestClose={toggleDialog}
-        contentLabel="Filter Options"
-        className="modal-content"
-        overlayClassName="modal-overlay"
-      >
-        <h2 className="modal-title">Filters & Search</h2>
-        <div className="filters-container">
-          <button
-            onClick={() => setLocalIsHiddenGem(!localIsHiddenGem)}
-            className={localIsHiddenGem ? "" : "disabled-filter"}
-          >
-            Hidden gem
-          </button>
-          <button
-            onClick={() => setLocalIsOnView(!localIsOnView)}
-            className={localIsOnView ? "" : "disabled-filter"}
-          >
-            On view
-          </button>
-          <button
-            onClick={() => setLocalIsPublicDomain(!localIsPublicDomain)}
-            className={localIsPublicDomain ? "" : "disabled-filter"}
-          >
-            Public domain
-          </button>
-        </div>
-        <form className="search-bar">
-          <input
-            type="text"
-            value={localSearchQuery}
-            onChange={(e) => setLocalSearchQuery(e.target.value)}
-            placeholder="Search ..."
-          />
-          <div className="search-buttons">
-            <button className="close-button" onClick={toggleDialog}>
-              Close
-            </button>
-            <button onClick={handleSearch} className="submit-button">
-              Search
-            </button>
-          </div>
-        </form>
-      </Modal>
+        onClose={toggleDialog}
+        localFilters={localFilters}
+        setLocalFilters={setLocalFilters}
+        onSubmit={handleSearch}
+      />
       <GalleryGrid artworks={artworks} />
     </div>
   );
