@@ -3,11 +3,11 @@ import unavailableImage from "../assets/unavailable-image.jpg";
 import "../gallery.css";
 export type GalleryCardType = {
   title: string;
-  artist_title: string;
-  place_of_origin: string;
-  date_display: string;
+  artistTitle: string;
+  placeOfOrigin: string;
+  dateDisplay: string;
   image?: string;
-  image_id: string;
+  imageId: string;
 };
 
 function GalleryCard({

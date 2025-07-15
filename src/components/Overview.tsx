@@ -1,47 +1,73 @@
 import { useEffect, useState } from "react";
 import useFetchArtworks from "../hooks/useFetchArtworks";
 import GalleryGrid from "./GalleryGrid";
+import FiltersModal from "./FiltersModal";
+import "../modal.css";
 
 function Overview() {
-  const [isOnView, setIsOnView] = useState(
-    () => localStorage.getItem("isOnView") === "true"
+  const [localFilters, setLocalFilters] = useState(() => ({
+    isOnView: localStorage.getItem("isOnView") === "true",
+    isPublicDomain: localStorage.getItem("isPublicDomain") === "true",
+    isHiddenGem: localStorage.getItem("isHiddenGem") === "true",
+    searchQuery: localStorage.getItem("searchQuery") || "",
+  }));
+
+  const [filters, setFilters] = useState(localFilters);
+
+  const isFiltersActive =
+    filters.isOnView ||
+    filters.isPublicDomain ||
+    filters.isHiddenGem ||
+    filters.searchQuery !== "";
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFilters(localFilters);
+    setIsDialogOpen(false);
+  };
+
+  const artworks = useFetchArtworks(
+    filters.isOnView,
+    filters.isPublicDomain,
+    filters.isHiddenGem,
+    filters.searchQuery
   );
-  const [isPublicDomain, setIsPublicDomain] = useState(
-    () => localStorage.getItem("isPublicDomain") === "true"
-  );
-  const [isHiddenGem, setIsHiddenGem] = useState(
-    () => localStorage.getItem("isHiddenGem") === "true"
-  );
-  const artworks = useFetchArtworks(isOnView, isPublicDomain, isHiddenGem);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const toggleDialog = () => {
+    if (!isDialogOpen) {
+      setLocalFilters(filters);
+    }
+    setIsDialogOpen(!isDialogOpen);
+  };
 
   useEffect(() => {
-    localStorage.setItem("isOnView", JSON.stringify(isOnView));
-    localStorage.setItem("isPublicDomain", JSON.stringify(isPublicDomain));
-    localStorage.setItem("isHiddenGem", JSON.stringify(isHiddenGem));
-  }, [isOnView, isPublicDomain, isHiddenGem]);
+    localStorage.setItem("isOnView", JSON.stringify(filters.isOnView));
+    localStorage.setItem(
+      "isPublicDomain",
+      JSON.stringify(filters.isPublicDomain)
+    );
+    localStorage.setItem("isHiddenGem", JSON.stringify(filters.isHiddenGem));
+    localStorage.setItem("searchQuery", filters.searchQuery);
+  }, [filters]);
+
   return (
     <div className="container">
-      <h1>Overview</h1>
-      <div className="filters-container">
-        <button
-          onClick={() => setIsHiddenGem(!isHiddenGem)}
-          className={isHiddenGem ? "" : "disabled-filter"}
-        >
-          Hidden gem
+      <h1 className="title-and-button">
+        Overview
+        <button className="material-symbols-outlined" onClick={toggleDialog}>
+          tune
+          {isFiltersActive && <span className="active-indicator"></span>}
         </button>
-        <button
-          onClick={() => setIsOnView(!isOnView)}
-          className={isOnView ? "" : "disabled-filter"}
-        >
-          On view
-        </button>
-        <button
-          onClick={() => setIsPublicDomain(!isPublicDomain)}
-          className={isPublicDomain ? "" : "disabled-filter"}
-        >
-          Public domain
-        </button>
-      </div>
+      </h1>
+      <FiltersModal
+        isOpen={isDialogOpen}
+        onClose={toggleDialog}
+        localFilters={localFilters}
+        setLocalFilters={setLocalFilters}
+        onSubmit={handleSearch}
+      />
       <GalleryGrid artworks={artworks} />
     </div>
   );

@@ -30,6 +30,12 @@ function NavBar() {
               <NavLink
                 to={link.to}
                 className={({ isActive }) => (isActive ? "active-link" : "")}
+                onKeyDown={(e) => {
+                  if (e.key === " ") {
+                    e.preventDefault();
+                    (e.target as HTMLElement).click();
+                  }
+                }}
               >
                 {link.title}
               </NavLink>

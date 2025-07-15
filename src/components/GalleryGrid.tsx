@@ -18,16 +18,16 @@ function GalleryGrid({ artworks }: GalleryGridProps) {
   return (
     <>
       <ul className="grid-container">
-        {artworks.map((artwork) => (
-          <li key={artwork.image_id}>
+        {artworks?.map((artwork) => (
+          <li key={artwork.imageId}>
             <GalleryCard
               title={artwork.title}
-              artist={artwork.artist_title}
+              artist={artwork.artistTitle}
               location={generateLocation(
-                artwork.place_of_origin,
-                artwork.date_display
+                artwork.placeOfOrigin,
+                artwork.dateDisplay
               )}
-              image={createImageURL(artwork.image_id)}
+              image={createImageURL(artwork.imageId)}
               altText={artwork.title}
             />
           </li>

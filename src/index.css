@@ -67,30 +67,6 @@ h1 {
   text-decoration: none;
 }
 
-.filters-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  button {
-    display: inline-block;
-    background-color: #262626;
-    color: white;
-    width: fit-content;
-    height: 42px;
-    padding: 8px 16px;
-    border-radius: 21px;
-    font-size: 19px;
-    line-height: 19px;
-    font-weight: 700;
-    border: 1px solid #262626;
-  }
-  .disabled-filter {
-    background-color: white;
-    color: #262626;
-    border: 1px solid #dbd9d7;
-  }
-}
-
 @media (min-width: 834px) {
   .container {
     margin-left: 24px;
