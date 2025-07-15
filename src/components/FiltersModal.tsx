@@ -55,7 +55,7 @@ const FiltersModal: React.FC<TFiltersModalProps> = ({
         {[
           ["isHiddenGem", "Hidden gem"],
           ["isOnView", "On view"],
-          ["iPublicDomain", "Public domain"],
+          ["isPublicDomain", "Public domain"],
         ].map(([value, text]) => (
           <button
             key={text}

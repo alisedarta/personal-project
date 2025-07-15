@@ -5,33 +5,16 @@ export const fetchArtworks = async (
   searchTerm: string
 ) => {
   try {
-    const query = {
-      query: {
-        bool: {
-          must: [
-            ...(isOnView ? [{ term: { is_on_view: true } }] : []),
-            ...(isPublicDomain ? [{ term: { is_public_domain: true } }] : []),
-            ...(isHiddenGem
-              ? [{ term: { has_not_been_viewed_much: true } }]
-              : []),
-            ...(searchTerm ? [{ match: { title: searchTerm } }] : []),
-          ],
-        },
-      },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const params = new URLSearchParams();
+    params.append("limit", "12");
+    if (isOnView) params.append("is_on_view", "true");
+    if (isPublicDomain) params.append("is_public_domain", "true");
+    if (isHiddenGem) params.append("is_hidden_gem", "true");
+    if (searchTerm) params.append("searchTerm", searchTerm);
 
-      limit: 10,
-
-      fields: [
-        "title",
-        "artist_title",
-        "place_of_origin",
-        "date_display",
-        "image_id",
-      ],
-    };
-
-    const params = encodeURIComponent(JSON.stringify(query));
-    const url = `https://api.artic.edu/api/v1/artworks/search?params=${params}`;
+    //const params = encodeURIComponent(JSON.stringify(query));
+    const url = `https://gallery-backend-wota.onrender.com/galleryItem?${params.toString()}`;
 
     const response = await fetch(url);
     if (!response.ok) {

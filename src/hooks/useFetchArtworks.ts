@@ -18,7 +18,7 @@ const useFetchArtworks = (
         isHiddenGem,
         searchTerm
       );
-      setArtworks(data.data);
+      setArtworks(data);
     };
 
     getArtworks();
